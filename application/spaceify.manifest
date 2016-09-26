@@ -1,0 +1,32 @@
+{
+  "provides_services": [
+    {
+      "service_name": "spaceify.org/services/lightcontrol",
+      "service_type": "open"
+    }
+  ],
+  "requires_services": [
+    {
+      "suggested_application": "spaceify/driver-philips-hue",
+      "service_name": "spaceify.org/services/lights"
+    }
+  ],
+  "name": "Light Control app",
+  "unique_name": "spaceify/lightcontrol",
+  "version": "0.1.0",
+  "type": "sandboxed",
+  "category": "graphics",
+  "start_command": "node lightcontrol.js",
+  "implements": [
+    "WEB_SERVER"
+  ],
+  "developer": {
+    "name": "Spaceify Oy",
+    "email": "admin@spaceify.net",
+    "url": "http://spaceify.net"
+  },
+  "short_description": "App for controlling your smart lights.",
+  "appstore_description": "App for controlling your smart lights. 'spaceify.org/services/lights' service implementing driver is required (e.g. 'spaceify/driver-philips-hue' or 'spaceify/driver-osram-lightify').",
+  "license": "MIT",
+  "creation_date": "2016-09-26 17:20:00"
+}

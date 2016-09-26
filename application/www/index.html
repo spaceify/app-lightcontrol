@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+
+	<title>Light control</title>
+
+	<script src="http://edge.spaceify.net/libs/spaceifyinitialize.js?jquery"></script>					<!-- Get Spaceify's classes and jQuery. Wait for spaceifyReady event! -->
+
+	<link href="index.css" rel="stylesheet" type="text/css" media="screen">
+
+	<script type="text/javascript">
+		var spaceify = null;
+		var lightsService = null;
+
+			// DOM AND EVENTS -- -- -- -- -- -- -- -- -- -- //
+		window.addEventListener("spaceifyReady", function()
+			{
+			spaceify = new SpaceifyApplication();
+			});
+
+	</script>
+</head>
+
+<body>
+	<div id="message_div" class="messagediv"></div>
+	<h1>Light control</h1>
+</body>
+
+</html>

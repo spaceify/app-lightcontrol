@@ -1,1 +1,2 @@
-# app-lightcontrol
+# Light control application for Spaceify Edge Platform
+
