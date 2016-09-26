@@ -7,7 +7,7 @@
   ],
   "requires_services": [
     {
-      "suggested_application": "spaceify/driver-philips-hue",
+      "suggested_application": "spaceify/driverphilipshue",
       "service_name": "spaceify.org/services/lights"
     }
   ],
@@ -26,7 +26,7 @@
     "url": "http://spaceify.net"
   },
   "short_description": "App for controlling your smart lights.",
-  "appstore_description": "App for controlling your smart lights. 'spaceify.org/services/lights' service implementing driver is required (e.g. 'spaceify/driver-philips-hue' or 'spaceify/driver-osram-lightify').",
+  "appstore_description": "App for controlling your smart lights. 'spaceify.org/services/lights' service implementing driver is required (e.g. 'spaceify/driverphilipshue' or 'spaceify/driverosramlightify').",
   "license": "MIT",
   "creation_date": "2016-09-26 17:20:00"
 }
