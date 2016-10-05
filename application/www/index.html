@@ -17,10 +17,18 @@
     <script src="node_modules/ng2-bootstrap/bundles/ng2-bootstrap.min.js"></script>
 
     <script src="systemjs.config.js"></script>
+  
+    <script src="http://edge.spaceify.net/libs/spaceifyinitialize.js?jquery"></script>	
+     
     <script>
-      System.import('app').catch(function(err){ console.error(err); });
-    </script>
-  </head>
+    window.addEventListener("spaceifyReady", function()
+	{
+     	System.import('app').catch(function(err){ console.error(err); });
+       	});
+
+    </script>	
+
+ </head>
 
   <body>
     <my-app>Loading...</my-app>

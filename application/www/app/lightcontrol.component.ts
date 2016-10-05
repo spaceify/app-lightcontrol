@@ -1,9 +1,11 @@
 import { Component, Input } from '@angular/core';
+import { LightControlService } from './lightcontrol.service';
 
 
 @Component({
     selector: 'light-control',
-    templateUrl: 'app/lightcontrol.component.html' 
+    templateUrl: 'app/lightcontrol.component.html',
+	providers: [LightControlService] 
 })
 export class LightControlComponent {
     @Input() id : String;
@@ -30,7 +32,7 @@ export class LightControlComponent {
         mstep: [1, 5, 10, 15, 25, 30]
     };
 
-    constructor(){
+    constructor(private lightService: LightControlService){
 
         this.lightNumber = runninglightNumber++;
     }
