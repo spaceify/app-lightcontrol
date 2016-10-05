@@ -1,0 +1,42 @@
+<h2>Light {{id}}</h2>
+
+<button type="button" class="btn btn-primary"
+        [(ngModel)]="singleModel" btnCheckbox
+        btnCheckboxTrue="On" btnCheckboxFalse="Off">
+        {{singleModel}}
+</button>
+
+
+<pre class="card card-block card-header">Random radio buttons</pre>
+<div class="btn-group">
+  <label class="btn btn-primary" [(ngModel)]="radioModel"
+         btnRadio="Left">Left</label>
+  <label class="btn btn-primary" [(ngModel)]="radioModel" btnRadio="Middle">Middle</label>
+  <label class="btn btn-primary" [(ngModel)]="radioModel"
+         btnRadio="Right">Right</label>
+</div>
+
+
+
+
+<timepicker [(ngModel)]="mytime" (change)="changed()" [hourStep]="hstep" 
+            [minuteStep]="mstep" [showMeridian]="ismeridian" 
+            [readonlyInput]="!isEnabled"></timepicker>
+ 
+<pre class="alert alert-info">Switch off light: {{mytime}}</pre>
+
+<!--
+<ng2-slider 
+    min="6"
+    max="23"
+    startValue="9"
+    endValue="21"
+    stepValue="2"
+    [normalHandlerStyle]="{ 'background-color': 'green'}"
+    [slidingHandlerStyle]="{
+          'border-radius': '9px',
+          'background-color': 'red'
+    }">
+</ng2-slider>
+
+-->
