@@ -6,6 +6,14 @@
         {{singleModel}}
 </button>
 
+<h3>Brightness </h3>
+<input type="number" min="0" step="10" #bbox
+      (keyup.enter)="bvalue=bbox.value"
+      (blur)="bvalue=bbox.value">
+
+<p>{{bvalue}}</p>
+
+<!--
 
 <pre class="card card-block card-header">Random radio buttons</pre>
 <div class="btn-group">
@@ -16,8 +24,18 @@
          btnRadio="Right">Right</label>
 </div>
 
+-->
 
 
+<h3>Hue value </h3>
+<input type="number" min="0" step="10" #box
+      (keyup.enter)="huevalue=box.value"
+      (blur)="huevalue=box.value">
+
+<p>{{huevalue}}</p>
+
+
+<h3>Timer </h3>
 
 <timepicker [(ngModel)]="mytime" (change)="changed()" [hourStep]="hstep" 
             [minuteStep]="mstep" [showMeridian]="ismeridian" 
