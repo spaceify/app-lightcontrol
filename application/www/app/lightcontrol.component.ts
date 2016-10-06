@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChange } from '@angular/core';
 import {Light} from './light'
 
 //import { LightControlService } from './lightcontrol.service';
@@ -9,10 +9,11 @@ import {Light} from './light'
     templateUrl: 'app/lightcontrol.component.html',
 
 })
-export class LightControlComponent implements OnInit  {
+export class LightControlComponent implements OnInit, OnChanges  {
     @Input() selectedLight : Light;
     public active : boolean;
 
+    public hueValue : number;
     public lightColor : number;
     public brightness : number;
     public saturation : number;
@@ -41,6 +42,11 @@ export class LightControlComponent implements OnInit  {
 
     ngOnInit() {
 
+    }
+
+    ngOnChanges(changes :  { [propName: string]: SimpleChange }){
+       console.log(changes);
+       //this.hueValue = this.selectedLight.hue;
     }
 
 }

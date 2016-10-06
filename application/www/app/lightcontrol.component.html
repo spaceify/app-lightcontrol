@@ -3,7 +3,7 @@
 <button type="button" class="btn btn-primary"
         [(ngModel)]="selectedLight.on" btnCheckbox
         btnCheckboxTrue="true" btnCheckboxFalse="false">
-        On
+        On {{selectedLight.on}}
 </button>
 
 <!--
@@ -38,11 +38,14 @@
 
 
 <h3>Hue value </h3>
-<input type="number" min="0" step="10" default="selectedLight.hue"  #box
-      (keyup.enter)="huevalue=box.value"
-      (blur)="huevalue=box.value">
+<input type="number" min="0" step="10" value="{{selectedLight.hue}}"  #box
+      (keyup.enter)="selectedLight.hue=box.value"
+      (blur)="selectedLight.hue=box.value">
 
-<p>{{huevalue}}</p>
+<p>{{selectedLight.hue}}</p>
+
+
+<!--
 
 
 <h3>Timer </h3>

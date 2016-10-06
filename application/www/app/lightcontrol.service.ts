@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
 import {Light} from './light'
+import {Http} from '@angular/http';
+
+import {Observable} from 'rxjs/Observable';
+
+
 
 declare class SpaceifyApplication{
 	start(a: any, b : string) : void;
@@ -14,12 +19,36 @@ export class LightControlService {
 
 	private lights : Light[] = [];;
 
-	constructor(){
+	//private lights : Observable<Array<Light>>;
 
-		this.spaceify = new SpaceifyApplication();
+	constructor(private http:Http){
+		var self = this;
 
-		//driverPhilipsHue = new PhilipsHueDriver();
-		this.spaceify.start(this, "spaceify/lightcontrol");
+		//this.lights = new Observable(observer => {});
+
+		if (typeof SpaceifyApplication === 'function'){
+			this.spaceify = new SpaceifyApplication();
+
+			//driverPhilipsHue = new PhilipsHueDriver();
+			this.spaceify.start(this, "spaceify/lightcontrol");
+		}
+		else{
+
+			var data : any;
+        	this.http.get('app/mock-data.json')
+                .subscribe(res => 
+				{
+					data = res.json();
+					//console.log(data);
+					for(var id in data){
+						self.lights.push(new Light(id, data[id]));
+						//console.log(data);
+					}
+					console.log(self.lights);
+			});	
+    
+
+		}
 
 	}
 
@@ -32,8 +61,9 @@ export class LightControlService {
 					{
 					console.log("getReachableLights Rpc call returned "+err+data);
 
-					for(var lightObject in data){
-						self.lights.push(new Light(data));
+					for(var id in data){
+						//console.log(data);
+						self.lights.push(new Light(id, data[id]));
 					}
 
 					console.log(self.lights)
@@ -45,6 +75,10 @@ export class LightControlService {
 
 	getLights(){
 		return this.lights;
+	}
+
+	setLight(light : Light){
+
 	}
 
 }

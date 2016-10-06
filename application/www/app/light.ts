@@ -4,10 +4,14 @@ export class Light {
   hue : number;
   //selected : boolean = false;
 
-  constructor(lightObject : any){
-    this.id = Object.keys(lightObject)[0];
-    this.on = lightObject[this.id].state.on;
-    this.hue =  lightObject[this.id].state.hue;
+  constructor(_id : string, lightObject : any){
+    //console.log(lightObject);
+
+    //this.id = Object.keys(lightObject)[0];
+    this.id = _id;
+
+    this.on = lightObject.state.on;
+    this.hue =  lightObject.state.hue;
 
 
   }

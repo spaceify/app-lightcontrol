@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { LightControlComponent }  from './lightcontrol.component';
 import { LightControlService } from './lightcontrol.service';
 
@@ -7,14 +7,16 @@ import {Light} from './light'
 
 @Component({
     selector: 'my-app',
-    changeDetection: ChangeDetectionStrategy.OnPush,
+    //changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: 'app/app.component.html',
-    providers: [LightControlService]
+    //providers: [LightControlService]
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
 
     //lights : Lig
-    selectedLight : Light = null;
+    selectedLight : Light;
+
+    lights : Light[] = null;
 
     public tabs:Array<any> = [
         {title: 'Light 1', content: '1'},
@@ -28,7 +30,7 @@ export class AppComponent {
 
     constructor(private lightService: LightControlService){
 
-      lightService.getLights();
+      
         //this.lights.push( new LightControlComponent());
 
     }
@@ -40,6 +42,13 @@ export class AppComponent {
     public setActiveTab(index:number):void {
         this.tabs[index].active = true;
     };
+
+    public ngOnInit(){
+        this.lights = this.lightService.getLights();
+        //console.log(this.lights);
+
+       // this.selectedLight = this.lights[1];
+    }
 
 
 }
