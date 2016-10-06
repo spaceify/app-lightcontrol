@@ -3,9 +3,20 @@ export class Light {
   on : boolean;
   hue : number;
 
-  constructor(){
-    
+  constructor(lightObject : any){
+    this.id = lightObject[0];
+
+    /*
+    var firstProp;
+    for(var key in lightObject) {
+        if(lightObject.hasOwnProperty(key)) {
+            firstProp = jsonObj[key];
+            break;
+        }
+    }
+    */
   }
+
 
 
 }
