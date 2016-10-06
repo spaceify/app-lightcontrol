@@ -1,10 +1,20 @@
 <h2>Light {{id}}</h2>
 
 <button type="button" class="btn btn-primary"
+        [(ngModel)]="selectedLight.on" btnCheckbox
+        btnCheckboxTrue="true" btnCheckboxFalse="false">
+        On
+</button>
+
+<!--
+
+
+<button type="button" class="btn btn-primary"
         [(ngModel)]="singleModel" btnCheckbox
         btnCheckboxTrue="On" btnCheckboxFalse="Off">
         {{singleModel}}
 </button>
+
 
 <h3>Brightness </h3>
 <input type="number" min="0" step="10" #bbox
@@ -13,7 +23,7 @@
 
 <p>{{bvalue}}</p>
 
-<!--
+
 
 <pre class="card card-block card-header">Random radio buttons</pre>
 <div class="btn-group">
@@ -28,7 +38,7 @@
 
 
 <h3>Hue value </h3>
-<input type="number" min="0" step="10" #box
+<input type="number" min="0" step="10" default="selectedLight.hue"  #box
       (keyup.enter)="huevalue=box.value"
       (blur)="huevalue=box.value">
 
@@ -37,14 +47,14 @@
 
 <h3>Timer </h3>
 
-<timepicker [(ngModel)]="mytime" (change)="changed()" [hourStep]="hstep" 
-            [minuteStep]="mstep" [showMeridian]="ismeridian" 
+<timepicker [(ngModel)]="mytime" (change)="changed()" [hourStep]="hstep"
+            [minuteStep]="mstep" [showMeridian]="ismeridian"
             [readonlyInput]="!isEnabled"></timepicker>
- 
+
 <pre class="alert alert-info">Switch off light: {{mytime}}</pre>
 
 <!--
-<ng2-slider 
+<ng2-slider
     min="6"
     max="23"
     startValue="9"

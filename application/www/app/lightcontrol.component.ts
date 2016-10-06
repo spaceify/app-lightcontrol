@@ -1,14 +1,16 @@
-import { Component, Input } from '@angular/core';
-import { LightControlService } from './lightcontrol.service';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import {Light} from './light'
+
+//import { LightControlService } from './lightcontrol.service';
 
 
 @Component({
     selector: 'light-control',
     templateUrl: 'app/lightcontrol.component.html',
-	providers: [LightControlService] 
+
 })
-export class LightControlComponent {
-    @Input() id : String;
+export class LightControlComponent implements OnInit  {
+    @Input() selectedLight : Light;
     public active : boolean;
 
     public lightColor : number;
@@ -25,16 +27,20 @@ export class LightControlComponent {
     public mstep:number = 15;
     public ismeridian:boolean = true;
     public isEnabled:boolean = true;
-    
+
     public mytime:Date = new Date();
     public options:any = {
         hstep: [1, 2, 3],
         mstep: [1, 5, 10, 15, 25, 30]
     };
 
-    constructor(private lightService: LightControlService){
+    constructor(){
 
         this.lightNumber = runninglightNumber++;
+    }
+
+    ngOnInit() {
+
     }
 
 }

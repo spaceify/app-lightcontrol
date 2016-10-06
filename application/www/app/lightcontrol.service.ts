@@ -9,29 +9,10 @@ declare class SpaceifyApplication{
 @Injectable()
 export class LightControlService {
 
-	spaceify : SpaceifyApplication;
-	privateService : any;
+	private spaceify : SpaceifyApplication;
+	private privateService : any;
 
-	lights : Light[] = [];;
-
-
-	start(){
-		this.privateService = this.spaceify.getRequiredService("spaceify.org/services/lightcontrol");
-
-		this.privateService.callRpc("getLightStates",[], self, function(err : string, data : Object)
-					{
-					console.log("getReachableLights Rpc call returned "+err+data);
-
-					for(var lightObject in data){
-						this.lights.add(new Light(lightObject));
-					}
-
-					});
-	}
-
-
-
-	fail(){}
+	private lights : Light[] = [];;
 
 	constructor(){
 
@@ -40,6 +21,30 @@ export class LightControlService {
 		//driverPhilipsHue = new PhilipsHueDriver();
 		this.spaceify.start(this, "spaceify/lightcontrol");
 
+	}
+
+
+	start(){
+		var self = this;
+		this.privateService = this.spaceify.getRequiredService("spaceify.org/services/lightcontrol");
+
+		this.privateService.callRpc("getLightStates",[], self, function(err : string, data : any)
+					{
+					console.log("getReachableLights Rpc call returned "+err+data);
+
+					for(var lightObject in data){
+						self.lights.push(new Light(data));
+					}
+
+					console.log(self.lights)
+
+					});
+	}
+
+	fail(){}
+
+	getLights(){
+		return this.lights;
 	}
 
 }

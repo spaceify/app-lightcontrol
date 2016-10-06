@@ -2,19 +2,14 @@ export class Light {
   id : string;
   on : boolean;
   hue : number;
+  //selected : boolean = false;
 
   constructor(lightObject : any){
-    this.id = lightObject[0];
+    this.id = Object.keys(lightObject)[0];
+    this.on = lightObject[this.id].state.on;
+    this.hue =  lightObject[this.id].state.hue;
 
-    /*
-    var firstProp;
-    for(var key in lightObject) {
-        if(lightObject.hasOwnProperty(key)) {
-            firstProp = jsonObj[key];
-            break;
-        }
-    }
-    */
+
   }
 
 

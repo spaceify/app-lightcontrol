@@ -1,16 +1,18 @@
 <h1>Hue light demo</h1>
 
 <tabset>
-    <tab *ngFor="let tabz of tabs"
-         [heading]="tabz.title"
+    <tab *ngFor="let tabz of lightService.getLights()"
+         [heading]="tabz.id"
          [active]="tabz.active"
-         (select)="tabz.active = true"
+         (select)="tabz.active = true; selectedLight = tabz"
          (deselect)="tabz.active = false"
          [disabled]="tabz.disabled"
          [removable]="tabz.removable"
          (removed)="removeTabHandler(tabz)">
-      
+
     </tab>
 </tabset>
 
-<light-control></light-control>
+<div *ngIf="selectedLight">
+  <light-control [selectedLight]= "selectedLight"></light-control>
+</div>
