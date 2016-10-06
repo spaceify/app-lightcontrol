@@ -11,6 +11,7 @@ export class LightControlService {
 	spaceify : SpaceifyApplication;
 	privateService : any;
 
+
 	start(){
 		this.privateService = this.spaceify.getRequiredService("spaceify.org/services/lightcontrol");
 
@@ -19,6 +20,8 @@ export class LightControlService {
 					console.log("getReachableLights Rpc call returned "+err+data);
 					});
 	}
+
+
 
 	fail(){}
 
