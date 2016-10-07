@@ -22,10 +22,16 @@ export class LightControlService {
 
 	private lightData : Gateway[] = [];
 
+	//loading$: Observable<String>;
+    //private _observer: Observer<String>;
+
 	//private lights : Observable<Array<Light>>;
 
 	constructor(private http:Http){
 		var self = this;
+
+		//this.loading$ = new Observable<String>(
+         //   observer => this._observer = observer);
 
 		//this.lights = new Observable(observer => {});
 
@@ -42,15 +48,7 @@ export class LightControlService {
                 .subscribe(res => 
 				{
 					data = res.json();
-					//console.log(data);
-					/*
-					for(var id in data){
-						self.lights.push(new Light(id, data[id]));
-						//console.log(data);
-					}
-					console.log(self.lights);
-					*/
-
+					
 					this.parseData(data);
 			});	
     
@@ -117,7 +115,7 @@ export class LightControlService {
 			name : "Gateway "+gwid,
 			paired: gw.paired,
 			ip: gw.ip,
-			children: lights,
+			lights: lights,	
 	
 		});
 		//console.log('Parsed person:', person);
@@ -134,14 +132,6 @@ export class LightControlService {
 					{
 					console.log("getReachableLights Rpc call returned "+err+data);
 
-					/*
-					for(var id in data){
-						//console.log(data);
-						self.lights.push(new Light(id, data[id]));
-					}
-
-					console.log(self.lights)
-					*/
 					self.parseData(data);
 
 					});
@@ -150,14 +140,6 @@ export class LightControlService {
 	fail(){}
 
 	getLights(){
-
-		/*
-		var lights : Light[] = [];
-		for(let gw of this.lightData){
-			for(let light of gw.children)
-				lights.push(light);
-		}
-		*/
 
 		return this.lights;
 	}
@@ -172,7 +154,8 @@ export class LightControlService {
 		if(this.privateService)
 			this.privateService.callRpc("setLightState",[light.gatewayid, light.id, state], this, null);
 
-		console.log("Set light: "+light);
+		console.log(typeof(state.on));
+		
 	}
 
 }

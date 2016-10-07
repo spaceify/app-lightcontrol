@@ -6,7 +6,7 @@ export class Gateway {
     name : string;
     ip : string;
 
-    children : Light[];
+    lights : Light[];
 
 
 

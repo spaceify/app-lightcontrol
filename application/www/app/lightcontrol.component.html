@@ -2,7 +2,7 @@
 
 <button type="button" class="btn btn-primary"
         [(ngModel)]="selectedLight.on" btnCheckbox
-        btnCheckboxTrue="true" btnCheckboxFalse="false">
+        btnCheckboxTrue=true btnCheckboxFalse=false>
         On {{selectedLight.on}}
 </button>
 
@@ -39,27 +39,25 @@
 
 <h3>Hue value </h3>
 <input type="number" min="0" step="10" value="{{selectedLight.hue}}"  #boxHue
-      (keyup.enter)="selectedLight.hue=boxHue.value"
-      (blur)="selectedLight.hue=boxHue.value">
+      (keyup.enter)="selectedLight.hue=boxHue.valueAsNumber"
+      (blur)="selectedLight.hue=boxHue.valueAsNumber">
 
 <p>{{selectedLight.hue}}</p>
 
 <h3>Saturation value </h3>
 <input type="number" min="0" step="10" value="{{selectedLight.sat}}"  #boxSat
-      (keyup.enter)="selectedLight.sat=boxSat.value"
-      (blur)="selectedLight.sat=boxSat.value">
+      (keyup.enter)="selectedLight.sat=boxSat.valueAsNumber"
+      (blur)="selectedLight.sat=boxSat.valueAsNumber">
 
 <p>{{selectedLight.sat}}</p>
 
 <h3>Brightness value </h3>
 <input type="number" min="0" step="10" value="{{selectedLight.bri}}"  #boxBri
-      (keyup.enter)="selectedLight.bri=boxBri.value"
-      (blur)="selectedLight.bri=boxBri.value">
+      (keyup.enter)="selectedLight.bri=+boxBri.valueAsNumber"
+      (blur)="selectedLight.bri=+boxBri.valueAsNumber">
 
 <p>{{selectedLight.bri}}</p>
 
-
-<button (click)="lightService.setLight(selectedLight)">Send lightstate</button>
 <!--
 
 

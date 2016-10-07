@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges, SimpleChange } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChange, DoCheck, KeyValueDiffers} from '@angular/core';
 import {Light} from './light'
 import { LightControlService } from './lightcontrol.service';
 
@@ -11,12 +11,17 @@ import { LightControlService } from './lightcontrol.service';
     templateUrl: 'app/lightcontrol.component.html',
 
 })
-export class LightControlComponent implements OnInit, OnChanges  {
+export class LightControlComponent implements OnInit, OnChanges, DoCheck  {
     @Input() selectedLight : Light;
+
+    differ: any;
+
+    //----------
+
     public active : boolean;
 
     public hueValue : number;
-    public lightColor : number;
+    //public lightColor : number;
     public brightness : number;
     public saturation : number;
 
@@ -24,8 +29,8 @@ export class LightControlComponent implements OnInit, OnChanges  {
     public radioModel:string = 'On';
     public checkModel:any = {left: false, middle: true, right: false};
 
-    lightNumber :number;
-
+   
+//----------
     public hstep:number = 1;
     public mstep:number = 15;
     public ismeridian:boolean = true;
@@ -37,9 +42,9 @@ export class LightControlComponent implements OnInit, OnChanges  {
         mstep: [1, 5, 10, 15, 25, 30]
     };
 
-    constructor(private lightService: LightControlService){
-
-        this.lightNumber = runninglightNumber++;
+    constructor(private lightService: LightControlService, private differs: KeyValueDiffers){
+        this.differ = differs.find({}).create(null);
+       
     }
 
     ngOnInit() {
@@ -47,8 +52,23 @@ export class LightControlComponent implements OnInit, OnChanges  {
     }
 
     ngOnChanges(changes :  { [propName: string]: SimpleChange }){
-       console.log(changes);
+       //console.log(changes);
        //this.hueValue = this.selectedLight.hue;
+    }
+
+    ngDoCheck(){
+        var changes = this.differ.diff(this.selectedLight);
+
+		if(changes) {
+			console.log('changes detected');
+			changes.forEachChangedItem(r => {
+                this.lightService.setLight(this.selectedLight);
+                console.log('changed ', r.currentValue)});
+			//changes.forEachAddedItem(r => console.log('added ' + r.currentValue));
+			//changes.forEachRemovedItem(r => console.log('removed ' + r.currentValue));
+		} else {
+			//console.log('nothing changed');
+		}
     }
 
 }

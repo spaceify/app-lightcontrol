@@ -4,6 +4,8 @@ import { LightControlService } from './lightcontrol.service';
 
 import {Light} from './light'
 
+import {Gateway} from './gateway'
+
 import { TreeModule } from 'angular2-tree-component';
 
 
@@ -20,6 +22,8 @@ export class AppComponent implements OnInit{
 
     lights : Light[] = null;
 
+    lightdata : Gateway[] = null;
+
     public tabs:Array<any> = [
         {title: 'Light 1', content: '1'},
         {title: 'Light 2', content: '2', disabled: false},
@@ -27,7 +31,6 @@ export class AppComponent implements OnInit{
     ];
 
     /*
-    
     nodes = [
     {
       id: 1,
@@ -53,7 +56,9 @@ export class AppComponent implements OnInit{
     }
   ];
 
-    */
+  */
+
+   nodes : any = [];
 
     //public activeTab : number;
 
@@ -64,6 +69,49 @@ export class AppComponent implements OnInit{
       
         //this.lights.push( new LightControlComponent());
 
+    }
+
+    public buildTree(){
+
+        let unique_id = 0;
+
+        function uuid(){
+            return unique_id++;
+        };
+
+        for(let gateway of this.lightService.getLightTree()){
+
+            var children : any;
+
+            for(let light of gateway.lights){
+                var child = {id : uuid(), name: light.name};
+                children.push(child);
+            }
+
+            var gw = {id : uuid(), name: gateway.name,  isExpanded: true, children : children};
+            this.nodes.push(gw);
+
+        }
+
+       
+        /*
+        [
+            {
+                id: 1,
+                name: 'root1',
+                isExpanded: true,
+                children: [
+                {
+                    id: 2,
+                    name: 'child1'
+                }, {
+                    id: 3,
+                    name: 'child2'
+                }
+                ]
+            }
+            ]
+            */
     }
 
     public selectLight(light : Light){
@@ -79,7 +127,13 @@ export class AppComponent implements OnInit{
         //console.log(this.lights);
 
        // this.selectedLight = this.lights[1];
-    }
+
+       //this.lightdata = this.lightService.getLightTree();
+
+       this.buildTree();
+    
+       console.log(this.nodes);
+}
 
 
 }
