@@ -17,16 +17,20 @@ var lightsService = null;
 
 var lights =  {0:  {state: {on: true, hue: 123456} }, 1: {state: {on: false, hue: 654} } };
 
-self.getLightStates = function()
+self.getLightStates = function(callobj, callback)
 	{
+	
+
+		
 	var foundLights = lightsService.sync.callRpc("getLights", [], self);
 	return foundLights;
+
 	//lightsService.callRpc("loadContent", [url, lightsServiceId, contentType]);
 	};
 
 self.setLightState =  function(gatewayId, lightId, state)
 	{
-	lightsService.sync.callRpc("setLightState", [gatewayId, lightId, state]);
+	return lightsService.sync.callRpc("setLightState", [gatewayId, lightId, state], self);
 	//lights.lightId.state = state;
 	};
 

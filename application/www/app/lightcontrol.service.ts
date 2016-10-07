@@ -170,7 +170,10 @@ export class LightControlService {
 	setLight(light : Light){
 		let state = {on: light.on, bri: light.bri, sat: light.sat, hue: light.hue}
 		if(this.privateService)
-			this.privateService.callRpc("setLightState",[light.gatewayid, light.id, state], this, null);
+			this.privateService.callRpc("setLightState",[light.gatewayid, light.id, state],  self, function(err : string, data : any)
+					{
+					console.log("setLightState Rpc call returned "+JSON.stringify(err)+JSON.stringify(data));
+					});
 
 		console.log("Set light: "+light);
 	}
