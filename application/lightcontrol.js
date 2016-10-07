@@ -17,16 +17,18 @@ var lightsService = null;
 
 var lights =  {0:  {state: {on: true, hue: 123456} }, 1: {state: {on: false, hue: 654} } };
 
-var getLightStates = function()
+self.getLightStates = function()
 	{
-	return lights;
+	var foundLights = lightsService.sync.callRpc("getLights", [], self);
+	return foundLights;
 	//lightsService.callRpc("loadContent", [url, lightsServiceId, contentType]);
-	}
+	};
 
-var setLightState =  function(lightId, state)
+self.setLightState =  function(gatewayId, lightId, state)
 	{
-	lights.lightId.state = state;	
-	}
+	lightsService.sync.callRpc("setLightState", [gatewayId, lightId, state]);
+	//lights.lightId.state = state;
+	};
 
 	// IMPLEMENT start AND fail METHODS IN YOUR APPLICATION!!! -- -- -- -- -- -- -- -- -- -- //
 self.start = function()
@@ -34,20 +36,17 @@ self.start = function()
 	// PROVIDED - CONNECTIONS FROM CLIENTS TO US
 	var service = spaceify.getProvidedService("spaceify.org/services/lightcontrol");
 
-	service.exposeRpcMethod("getLightStates", self, getLightStates);
-	service.exposeRpcMethod("setLightState", self, setLightState);
-	
-
-	
+	service.exposeRpcMethod("getLightStates", self, self.getLightStates);
+	service.exposeRpcMethod("setLightState", self, self.setLightState);
 
 
 	// REQUIRED - OUR CONNECTION TO THE LIGHTS SERVICE
 	lightsService = spaceify.getRequiredService("spaceify.org/services/lights");
-	}
+	};
 
 self.fail = function()
 	{
-	}
+	};
 
 }
 
