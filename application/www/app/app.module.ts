@@ -16,10 +16,12 @@ import { TimepickerModule } from 'ng2-bootstrap/ng2-bootstrap';
 
 import { HttpModule }      from '@angular/http';
 
+import { TreeModule } from 'angular2-tree-component';
+
 //import {Ng2SliderComponent} from "ng2-slider-component/ng2-slider.component";
 
 @NgModule({
-  imports: [ BrowserModule, HttpModule, Ng2BootstrapModule, ButtonsModule, TabsModule, TimepickerModule ],
+  imports: [ BrowserModule, HttpModule, Ng2BootstrapModule, ButtonsModule, TabsModule, TimepickerModule, TreeModule ],
   declarations: [ AppComponent, LightControlComponent ],
   providers: [LightControlService],
   bootstrap: [ AppComponent ]

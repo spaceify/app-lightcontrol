@@ -15,8 +15,11 @@
     </tab>
 </tabset>
 
--->
 
+<Tree [nodes]="lightService.getLightTree()"></Tree>
+
+-->
+ 
 <div *ngFor="let light of lights">
    
    <button (click)="selectLight(light)">Light {{light.id}}</button>

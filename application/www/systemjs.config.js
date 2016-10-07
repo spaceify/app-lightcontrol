@@ -29,6 +29,9 @@
       'angular-in-memory-web-api': 'npm:angular-in-memory-web-api',
 
       'moment': 'npm:moment/moment.js',
+
+      'angular2-tree-component':    'node_modules/angular2-tree-component',
+      'lodash':                     'node_modules/lodash',
     
     },
     // packages tells the System loader how to load when no filename and/or no extension
@@ -43,7 +46,9 @@
       'angular-in-memory-web-api': {
         main: './index.js',
         defaultExtension: 'js'
-      }
+      },
+      'angular2-tree-component'   : { main: 'dist/angular2-tree-component.js', defaultExtension: 'js' },
+      'lodash'                    : { main: 'lodash.js', defaultExtension: 'js' },
     }
   });
 })(this);

@@ -1,5 +1,7 @@
 import { Component, Input, OnInit, OnChanges, SimpleChange } from '@angular/core';
 import {Light} from './light'
+import { LightControlService } from './lightcontrol.service';
+
 
 //import { LightControlService } from './lightcontrol.service';
 
@@ -35,7 +37,7 @@ export class LightControlComponent implements OnInit, OnChanges  {
         mstep: [1, 5, 10, 15, 25, 30]
     };
 
-    constructor(){
+    constructor(private lightService: LightControlService){
 
         this.lightNumber = runninglightNumber++;
     }

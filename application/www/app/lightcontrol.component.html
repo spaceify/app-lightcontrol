@@ -38,13 +38,28 @@
 
 
 <h3>Hue value </h3>
-<input type="number" min="0" step="10" value="{{selectedLight.hue}}"  #box
-      (keyup.enter)="selectedLight.hue=box.value"
-      (blur)="selectedLight.hue=box.value">
+<input type="number" min="0" step="10" value="{{selectedLight.hue}}"  #boxHue
+      (keyup.enter)="selectedLight.hue=boxHue.value"
+      (blur)="selectedLight.hue=boxHue.value">
 
 <p>{{selectedLight.hue}}</p>
 
+<h3>Saturation value </h3>
+<input type="number" min="0" step="10" value="{{selectedLight.sat}}"  #boxSat
+      (keyup.enter)="selectedLight.sat=boxSat.value"
+      (blur)="selectedLight.sat=boxSat.value">
 
+<p>{{selectedLight.sat}}</p>
+
+<h3>Brightness value </h3>
+<input type="number" min="0" step="10" value="{{selectedLight.bri}}"  #boxBri
+      (keyup.enter)="selectedLight.bri=boxBri.value"
+      (blur)="selectedLight.bri=boxBri.value">
+
+<p>{{selectedLight.bri}}</p>
+
+
+<button (click)="lightService.setLight(selectedLight)">Send lightstate</button>
 <!--
 
 
