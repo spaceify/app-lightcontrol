@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges, SimpleChange, DoCheck, KeyValueDiffers} from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChange, DoCheck, KeyValueDiffers, KeyValueChangeRecord} from '@angular/core';
 import {Light} from './light'
 import { LightControlService } from './lightcontrol.service';
 
@@ -29,7 +29,7 @@ export class LightControlComponent implements OnInit, OnChanges, DoCheck  {
     public radioModel:string = 'On';
     public checkModel:any = {left: false, middle: true, right: false};
 
-   
+
 //----------
     public hstep:number = 1;
     public mstep:number = 15;
@@ -44,7 +44,7 @@ export class LightControlComponent implements OnInit, OnChanges, DoCheck  {
 
     constructor(private lightService: LightControlService, private differs: KeyValueDiffers){
         this.differ = differs.find({}).create(null);
-       
+
     }
 
     ngOnInit() {
@@ -61,7 +61,7 @@ export class LightControlComponent implements OnInit, OnChanges, DoCheck  {
 
 		if(changes) {
 			console.log('changes detected');
-			changes.forEachChangedItem(r => {
+			changes.forEachChangedItem((r : KeyValueChangeRecord) => {
                 this.lightService.setLight(this.selectedLight);
                 console.log('changed ', r.currentValue)});
 			//changes.forEachAddedItem(r => console.log('added ' + r.currentValue));
