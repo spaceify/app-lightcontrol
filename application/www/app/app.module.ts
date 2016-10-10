@@ -18,10 +18,21 @@ import { HttpModule }      from '@angular/http';
 
 import { TreeModule } from 'angular2-tree-component';
 
+import { MaterialModule} from  '@angular/material';
+
 //import {Ng2SliderComponent} from "ng2-slider-component/ng2-slider.component";
 
 @NgModule({
-  imports: [ BrowserModule, HttpModule, Ng2BootstrapModule, ButtonsModule, TabsModule, TimepickerModule, TreeModule ],
+  imports: [ 
+    BrowserModule, 
+    HttpModule, 
+    Ng2BootstrapModule, 
+    ButtonsModule, 
+    TabsModule, 
+    TimepickerModule, 
+    TreeModule, 
+    MaterialModule.forRoot(),
+     ],
   declarations: [ AppComponent, LightControlComponent ],
   providers: [LightControlService],
   bootstrap: [ AppComponent ]

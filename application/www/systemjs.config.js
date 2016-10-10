@@ -30,9 +30,15 @@
 
       'moment': 'npm:moment/moment.js',
 
-      'angular2-tree-component':    'node_modules/angular2-tree-component',
-      'lodash':                     'node_modules/lodash',
-    
+      'angular2-tree-component':    'npm:angular2-tree-component',
+      'lodash':                     'npm:lodash',
+
+      '@angular/material':       'npm:@angular/material/material.umd.js',
+      '@angular/material/core':   'npm:@angular/material/core/core.umd.js',
+      '@angular/material/slider': 'npm:@angular/material/slider/slider.umd.js',
+      '@angular/material/button': 'npm:@angular/material/button/button.umd.js',
+      
+
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -49,6 +55,7 @@
       },
       'angular2-tree-component'   : { main: 'dist/angular2-tree-component.js', defaultExtension: 'js' },
       'lodash'                    : { main: 'lodash.js', defaultExtension: 'js' },
+      
     }
   });
 })(this);
