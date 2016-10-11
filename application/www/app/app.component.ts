@@ -13,6 +13,13 @@ import { TreeModule } from 'angular2-tree-component';
     selector: 'my-app',
     //changeDetection: ChangeDetectionStrategy.OnPush,
     templateUrl: 'app/app.component.html',
+    styles: [`
+        .center {
+            width: 300px;
+            margin: 0 auto;
+            background-color: lightgray;
+        }
+     `],
     //providers: [LightControlService]
 })
 export class AppComponent implements OnInit{

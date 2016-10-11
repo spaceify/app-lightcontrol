@@ -1,7 +1,8 @@
-import { Component, Input, OnInit, OnChanges, SimpleChange, DoCheck, KeyValueDiffers, KeyValueChangeRecord} from '@angular/core';
+import { Component, ViewChild, AfterViewInit,  Input, OnInit, OnChanges, SimpleChange, DoCheck, KeyValueDiffers, KeyValueChangeRecord} from '@angular/core';
 import {Light} from './light'
 import { LightControlService } from './lightcontrol.service';
 
+import {MdSlider} from '@angular/material';
 
 //import { LightControlService } from './lightcontrol.service';
 
@@ -13,9 +14,12 @@ import { LightControlService } from './lightcontrol.service';
 })
 export class LightControlComponent implements OnInit, OnChanges, DoCheck  {
     @Input() selectedLight : Light;
+    @ViewChild('sliderHue') sliderHue : MdSlider; 
+
 
     differ: any;
 
+    /*
     //----------
 
     public active : boolean;
@@ -42,17 +46,23 @@ export class LightControlComponent implements OnInit, OnChanges, DoCheck  {
         mstep: [1, 5, 10, 15, 25, 30]
     };
 
+    */
+
     constructor(private lightService: LightControlService, private differs: KeyValueDiffers){
-        this.differ = differs.find({}).create(null);
+        
 
     }
 
     ngOnInit() {
-
+        this.differ = this.differs.find({}).create(null);
     }
 
     ngOnChanges(changes :  { [propName: string]: SimpleChange }){
-       //console.log(changes);
+
+        //this.sliderHue.value = this.selectedLight.hue;
+        
+        
+        //console.log(changes);
        //this.hueValue = this.selectedLight.hue;
     }
 

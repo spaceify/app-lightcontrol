@@ -16,7 +16,11 @@
     "tsc": "tsc",
     "tsc:w": "tsc -w",
     "typings": "typings",
-    "webdriver:update": "webdriver-manager update"
+    "webdriver:update": "webdriver-manager update",
+    "gulp": "gulp",
+     "rimraf": "rimraf",
+     "bundle": "gulp bundle",
+     "postbundle": "rimraf dist"
   },
   "keywords": [],
   "author": "",
@@ -62,7 +66,11 @@
     "karma-jasmine": "^1.0.2",
     "karma-jasmine-html-reporter": "^0.2.2",
     "protractor": "^3.3.0",
-    "rimraf": "^2.5.4"
+    "rimraf": "^2.5.4",
+    "gulp": "^3.9.1",
+    "gulp-typescript": "2.13.6",
+    "gulp-inline-ng2-template": "2.0.1",
+    "systemjs-builder": "^0.15.16"
   },
   "repository": {}
 }

@@ -1,3 +1,5 @@
+<div class="center">
+
 <h1>Hue light demo</h1>
 
 <!--
@@ -16,20 +18,26 @@
 </tabset>
 
 <Tree [nodes]="lightService.getLightTree()"></Tree>
--->
 
 
-
-
- 
 <div *ngFor="let light of lights">
    
    <button (click)="selectLight(light)">Light {{light.id}}</button>
 </div>
 
 <Tree [nodes]="nodes" #tree></Tree>
+-->
 
 
+<md-button-toggle-group>
+    
+    <md-button-toggle *ngFor="let light of lights; let i = index;" (click)="selectLight(light)">{{i+1}}</md-button-toggle>
+
+</md-button-toggle-group>
+
+ 
 <div *ngIf="selectedLight">
   <light-control [selectedLight]="selectedLight"></light-control>
+</div>
+
 </div>

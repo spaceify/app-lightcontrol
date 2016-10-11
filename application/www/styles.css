@@ -136,6 +136,14 @@ nav a.router-link-active {
   border-radius: 4px 0 0 4px;
 }
 
+/*
+.centerer {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+*/
+
 /* everywhere else */
 * { 
   font-family: Arial, Helvetica, sans-serif; 

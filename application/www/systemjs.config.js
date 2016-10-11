@@ -37,6 +37,7 @@
       '@angular/material/core':   'npm:@angular/material/core/core.umd.js',
       '@angular/material/slider': 'npm:@angular/material/slider/slider.umd.js',
       '@angular/material/button': 'npm:@angular/material/button/button.umd.js',
+      '@angular/material/icon': 'npm:@angular/material/icon/icon.umd.js',
       
 
     },
