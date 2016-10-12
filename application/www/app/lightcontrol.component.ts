@@ -1,4 +1,5 @@
-import { Component, ViewChild, AfterViewInit,  Input, OnInit, OnChanges, SimpleChange, DoCheck, KeyValueDiffers, KeyValueChangeRecord} from '@angular/core';
+import { Component, ViewChild, AfterViewInit, AfterViewChecked,  Input, OnInit, 
+        OnChanges, SimpleChange, DoCheck, KeyValueDiffers, KeyValueChangeRecord, ChangeDetectorRef} from '@angular/core';
 import {Light} from './light'
 import { LightControlService } from './lightcontrol.service';
 
@@ -48,7 +49,7 @@ export class LightControlComponent implements OnInit, OnChanges, DoCheck  {
 
     */
 
-    constructor(private lightService: LightControlService, private differs: KeyValueDiffers){
+    constructor(private lightService: LightControlService, private differs: KeyValueDiffers, private cdRef:ChangeDetectorRef){
         
 
     }
@@ -64,6 +65,13 @@ export class LightControlComponent implements OnInit, OnChanges, DoCheck  {
         
         //console.log(changes);
        //this.hueValue = this.selectedLight.hue;
+    }
+
+    ngAfterViewChecked()
+    {
+    //console.log( "! changement de la date du composant !" );
+    //this.dateNow = new Date();
+        this.cdRef.detectChanges();
     }
 
     ngDoCheck(){

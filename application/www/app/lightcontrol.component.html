@@ -54,7 +54,7 @@
 
 -->
 
-<md-slider min="0" max="65500" value="{{selectedLight.hue}}" [(ngModel)]="selectedLight.hue" #sliderHue>
+<md-slider [(ngModel)]="selectedLight.hue" min="0" max="65500" #sliderHue>
 </md-slider>
 
 <p>{{sliderHue.value}}</p>
@@ -67,7 +67,7 @@
 
 -->
 
-<md-slider min="0" max="255" value="{{selectedLight.sat}}" [(ngModel)]="selectedLight.sat" #sliderSat>
+<md-slider min="0" max="65500" [(ngModel)]="selectedLight.sat" #sliderSat>
 </md-slider>
 
 <p>{{selectedLight.sat}}</p>
@@ -80,7 +80,7 @@
 
 -->
 
-<md-slider min="0" max="65500" value="{{selectedLight.bri}}" [(ngModel)]="selectedLight.bri" #sliderBri>
+<md-slider min="0" max="65500" [(ngModel)]="selectedLight.bri" #sliderBri>
 </md-slider>
 
 <p>{{selectedLight.bri}}</p>

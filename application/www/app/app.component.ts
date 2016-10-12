@@ -15,6 +15,7 @@ import { TreeModule } from 'angular2-tree-component';
     templateUrl: 'app/app.component.html',
     styles: [`
         .center {
+            padding: 20px;
             width: 300px;
             margin: 0 auto;
             background-color: lightgray;
