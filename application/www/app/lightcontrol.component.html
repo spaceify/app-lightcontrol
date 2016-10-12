@@ -1,40 +1,5 @@
 <h2>Light {{selectedLight.id}}</h2>
 
-<!--
-<button type="button" class="btn btn-primary"
-        [(ngModel)]="selectedLight.on" btnCheckbox
-        btnCheckboxTrue=true btnCheckboxFalse=false>
-        On {{selectedLight.on}}
-</button>
-
-
-<button type="button" class="btn btn-primary"
-        [(ngModel)]="singleModel" btnCheckbox
-        btnCheckboxTrue="On" btnCheckboxFalse="Off">
-        {{singleModel}}
-</button>
-
-
-<h3>Brightness </h3>
-<input type="number" min="0" step="10" #bbox
-      (keyup.enter)="bvalue=bbox.value"
-      (blur)="bvalue=bbox.value">
-
-<p>{{bvalue}}</p>
-
-
-
-<pre class="card card-block card-header">Random radio buttons</pre>
-<div class="btn-group">
-  <label class="btn btn-primary" [(ngModel)]="radioModel"
-         btnRadio="Left">Left</label>
-  <label class="btn btn-primary" [(ngModel)]="radioModel" btnRadio="Middle">Middle</label>
-  <label class="btn btn-primary" [(ngModel)]="radioModel"
-         btnRadio="Right">Right</label>
-</div>
-
--->
-
 <button *ngIf="selectedLight.on" md-icon-button md-raised-button color="primary" (click)="selectedLight.on = false;">
       <md-icon class="md-24">lightbulb_outline</md-icon>
 </button>
@@ -45,42 +10,24 @@
 
 <h3>Hue</h3>
 
-<!--
-<input type="number" min="0" step="10" value="{{selectedLight.hue}}"  #boxHue
-      (keyup.enter)="selectedLight.hue=boxHue.valueAsNumber"
-      (blur)="selectedLight.hue=boxHue.valueAsNumber">
 
-      <md-slider min="0" max="65500" value="selectedLight.hue" [(ngModel)]="selectedLight.hue">
-
--->
-
-<md-slider [(ngModel)]="selectedLight.hue" min="0" max="65500" #sliderHue>
+<md-slider [(ngModel)]="selectedLight.hue" min="0" max="65535" #sliderHue>
 </md-slider>
 
 <p>{{sliderHue.value}}</p>
 
 <h3>Saturation</h3>
-<!--
-<input type="number" min="0" step="10" value="{{selectedLight.sat}}"  #boxSat
-      (keyup.enter)="selectedLight.sat=boxSat.valueAsNumber"
-      (blur)="selectedLight.sat=boxSat.valueAsNumber">
 
--->
 
-<md-slider min="0" max="65500" [(ngModel)]="selectedLight.sat" #sliderSat>
+<md-slider min="0" max="254" [(ngModel)]="selectedLight.sat" #sliderSat>
 </md-slider>
 
 <p>{{selectedLight.sat}}</p>
 
 <h3>Brightness</h3>
-<!--
-<input type="number" min="0" step="10" value="{{selectedLight.bri}}"  #boxBri
-      (keyup.enter)="selectedLight.bri=+boxBri.valueAsNumber"
-      (blur)="selectedLight.bri=+boxBri.valueAsNumber">
 
--->
 
-<md-slider min="0" max="65500" [(ngModel)]="selectedLight.bri" #sliderBri>
+<md-slider min="1" max="254" [(ngModel)]="selectedLight.bri" #sliderBri>
 </md-slider>
 
 <p>{{selectedLight.bri}}</p>
@@ -111,3 +58,4 @@
 </ng2-slider>
 
 -->
+

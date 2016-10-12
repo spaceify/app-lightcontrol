@@ -157,13 +157,14 @@ export class LightControlService {
 					console.log("setLightState Rpc call returned "+JSON.stringify(err)+JSON.stringify(data));
 					});
 
+					/*
 		console.log("On: "+ state.on +" "+ typeof(state.on) 
 		+ " Hue: "+state.hue+" "+typeof(state.hue)
 		+ " Sat: "+state.sat+" "+typeof(state.sat)
 		+ " Bri: "+state.bri+" "+typeof(state.bri)
-		
-		
 		);
+
+		*/
 		
 	}
 

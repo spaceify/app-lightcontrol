@@ -11,6 +11,7 @@ import {MdSlider} from '@angular/material';
 @Component({
     selector: 'light-control',
     templateUrl: 'app/lightcontrol.component.html',
+    styles: [],
 
 })
 export class LightControlComponent implements OnInit, OnChanges, DoCheck  {
@@ -81,7 +82,8 @@ export class LightControlComponent implements OnInit, OnChanges, DoCheck  {
 			console.log('changes detected');
 			changes.forEachChangedItem((r : KeyValueChangeRecord) => {
                 this.lightService.setLight(this.selectedLight);
-                console.log('changed ', r.currentValue)});
+                //console.log('changed ', r.currentValue)
+            });
 			//changes.forEachAddedItem(r => console.log('added ' + r.currentValue));
 			//changes.forEachRemovedItem(r => console.log('removed ' + r.currentValue));
 		} else {
@@ -91,4 +93,4 @@ export class LightControlComponent implements OnInit, OnChanges, DoCheck  {
 
 }
 
-var runninglightNumber =0;
+
