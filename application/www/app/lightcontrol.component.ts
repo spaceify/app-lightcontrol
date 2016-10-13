@@ -55,7 +55,7 @@ export class LightControlComponent implements OnInit, OnChanges, DoCheck  {
                 
                     this.lightService.setLight(this.selectedLight);
 
-                    console.log(r)
+                    //console.log(r)
                     //console.log('changed ', r.currentValue)
                 
                 //console.log('changed ', r.currentValue)
@@ -72,7 +72,7 @@ export class LightControlComponent implements OnInit, OnChanges, DoCheck  {
 			console.log('RGB changes detected');
 			changes.forEachChangedItem((r : KeyValueChangeRecord) => {
                 
-                console.log(this.RGB.red);
+                //console.log(this.RGB.red);
 
                 let hsv =  this.RGBtoHSV(this.RGB.red, this.RGB.green, this.RGB.blue);
                 this.selectedLight.hue = Math.floor(65535 * hsv[0]);
@@ -135,6 +135,85 @@ export class LightControlComponent implements OnInit, OnChanges, DoCheck  {
 
 
         return [hue/360, sat, bri];
+    }
+
+    HSVToRGB(h : number, s : number, v: number) : number[]{
+        var r = 0, g = 0, b = 0;
+        var i = 0;
+        var f = 0, p = 0, q = 0, t = 0;
+        
+        // Make sure our arguments stay in-range
+        h = Math.max(0, Math.min(360, h));
+        s = Math.max(0, Math.min(100, s));
+        v = Math.max(0, Math.min(100, v));
+        
+        // We accept saturation and value arguments from 0 to 100 because that's
+        // how Photoshop represents those values. Internally, however, the
+        // saturation and value are calculated from a range of 0 to 1. We make
+        // That conversion here.
+        s /= 100;
+        v /= 100;
+        
+        if(s == 0) {
+            // Achromatic (grey)
+            r = g = b = v;
+            return [
+                Math.round(r * 255), 
+                Math.round(g * 255), 
+                Math.round(b * 255)
+            ];
+        }
+        
+        h /= 60; // sector 0 to 5
+        i = Math.floor(h);
+        f = h - i; // factorial part of h
+        p = v * (1 - s);
+        q = v * (1 - s * f);
+        t = v * (1 - s * (1 - f));
+        
+        switch(i) {
+            case 0:
+                r = v;
+                g = t;
+                b = p;
+                break;
+        
+            case 1:
+                r = q;
+                g = v;
+                b = p;
+                break;
+        
+            case 2:
+                r = p;
+                g = v;
+                b = t;
+                break;
+        
+            case 3:
+                r = p;
+                g = q;
+                b = v;
+                break;
+        
+            case 4:
+                r = t;
+                g = p;
+                b = v;
+                break;
+        
+            default: // case 5:
+                r = v;
+                g = p;
+                b = q;
+        }
+        
+        return [
+            Math.round(r * 255), 
+            Math.round(g * 255), 
+            Math.round(b * 255)
+        ];
+    
     }
 
 }

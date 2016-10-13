@@ -18,7 +18,8 @@ import { TreeModule } from 'angular2-tree-component';
             padding: 20px;
             width: 300px;
             margin: 0 auto;
-            background-color: lightgray;
+            //background-color: lightgray;
+            //background: linear-gradient(to bottom, darkgray, lightgray);
         }
      `],
     //providers: [LightControlService]

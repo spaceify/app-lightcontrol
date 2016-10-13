@@ -11,10 +11,16 @@ h2, h3 {
 }
 body { 
   margin: 2em; 
+  background: linear-gradient(to bottom, darkgray, lightgray);
+  height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 body, input[text], button { 
   color: #888; 
   font-family: Cambria, Georgia; 
+  
 }
 a {
   cursor: pointer;
