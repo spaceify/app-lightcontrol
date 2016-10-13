@@ -19,19 +19,18 @@ var lights =  {0:  {state: {on: true, hue: 123456} }, 1: {state: {on: false, hue
 
 self.getLightStates = function(callobj, callback)
 	{
+	//callback(null,"hajotkaa!!!!");		
 	
-
+	lightsService.callRpc("getLights", [], self, function(err,data)
+		{
+		callback(err, data);		
+		});
 		
-	var foundLights = lightsService.sync.callRpc("getLights", [], self);
-	return foundLights;
-
-	//lightsService.callRpc("loadContent", [url, lightsServiceId, contentType]);
 	};
 
 self.setLightState =  function(gatewayId, lightId, state)
 	{
-	return lightsService.sync.callRpc("setLightState", [gatewayId, lightId, state], self);
-	//lights.lightId.state = state;
+	lightsService.callRpc("setLightState", [gatewayId, lightId, state]);
 	};
 
 	// IMPLEMENT start AND fail METHODS IN YOUR APPLICATION!!! -- -- -- -- -- -- -- -- -- -- //
