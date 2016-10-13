@@ -51,11 +51,12 @@ export class LightControlComponent implements OnInit, OnChanges, DoCheck  {
 
 		if(changes) {
 			console.log('Selected Light changes detected');
+            this.lightService.setLight(this.selectedLight);
 			changes.forEachChangedItem((r : KeyValueChangeRecord) => {
                 
-                    this.lightService.setLight(this.selectedLight);
+                    
 
-                    //console.log(r)
+                    console.log(r)
                     //console.log('changed ', r.currentValue)
                 
                 //console.log('changed ', r.currentValue)
@@ -64,44 +65,36 @@ export class LightControlComponent implements OnInit, OnChanges, DoCheck  {
 			//changes.forEachRemovedItem(r => console.log('removed ' + r.currentValue));
 		} else {
 			//console.log('nothing changed');
-            changes = this.differ.diff(this.RGB);
+            
+		}
+
+
+        
+
+        /*
+
+        changes = this.differ.diff(this.RGB);
             if(changes) {
                 console.log('RGB changes detected');
+                let hsv =  this.RGBtoHSV(this.RGB.red, this.RGB.green, this.RGB.blue);
+                this.selectedLight.hue = Math.floor(65535 * hsv[0]);
+                this.selectedLight.sat = Math.floor(254 * hsv[1]);
+                this.selectedLight.bri = Math.floor(253 * hsv[2] +1);
+                this.lightService.setLight(this.selectedLight);
+
                 changes.forEachChangedItem((r : KeyValueChangeRecord) => {
                     
-                    //console.log(this.RGB.red);
                     
-                    /*
-
-                    let hsv =  this.RGBtoHSV(this.RGB.red, this.RGB.green, this.RGB.blue);
-                    this.selectedLight.hue = Math.floor(65535 * hsv[0]);
-                    this.selectedLight.sat = Math.floor(254 * hsv[1]);
-                    this.selectedLight.bri = Math.floor(253 * hsv[2] +1);
-                    */
-
-                    //this.lightService.setLight(this.selectedLight);
-
-
                     //console.log(r)
-                    //console.log('changed ', r.currentValue)
-                    
-                
-                    
-
-                    //console.log('changed ', r.currentValue)
+                   
                 });
                 //changes.forEachAddedItem(r => console.log('added ' + r.currentValue));
                 //changes.forEachRemovedItem(r => console.log('removed ' + r.currentValue));
             } else {
                 //console.log('nothing changed');
             }
-		}
 
-
-        
-
-
-        
+        */
 
         
 
