@@ -11,7 +11,12 @@ import {MdSlider} from '@angular/material';
 @Component({
     selector: 'light-control',
     templateUrl: 'app/lightcontrol.component.html',
-    styles: [],
+    styles: [` .colorBox {
+        width: 24px;
+        height: 24px;
+        background:#fff;
+        }   
+    `],
 
 })
 export class LightControlComponent implements OnInit, OnChanges, DoCheck  {
@@ -23,6 +28,8 @@ export class LightControlComponent implements OnInit, OnChanges, DoCheck  {
 
     RGB = {name: "rgb", red : 0, green : 0, blue : 0}
       
+    boxColor : string;
+
     constructor(private lightService: LightControlService, private differs: KeyValueDiffers, private cdRef:ChangeDetectorRef){
         
 
@@ -50,15 +57,29 @@ export class LightControlComponent implements OnInit, OnChanges, DoCheck  {
         var changes = this.differ.diff(this.selectedLight);
 
 		if(changes) {
-			console.log('Selected Light changes detected');
+			console.log('Selected Light - changes detected');
             this.lightService.setLight(this.selectedLight);
+
+            var hueNormal = this.selectedLight.hue/65535;
+            var satNormal = this.selectedLight.sat/254;
+            var briNormal = this.selectedLight.bri/254;
+
+            let hsl = this.HSVtoHSL(hueNormal, satNormal, briNormal);
+
+            //console.log(hueNormal);
+            //HSVToRGB();
+            //this.boxColor = "hsl("+Math.floor(hsl[0]*360)+", "+Math.floor(hsl[1]*100)+"%,"+ Math.floor(hsl[2]*100)+ "%)";
+
+            let rgb = this.HSVtoRGB(hueNormal, satNormal, briNormal);
+
+            this.boxColor = "rgb("+Math.floor(rgb[0])+", "+Math.floor(rgb[1])+"%,"+ Math.floor(rgb[2])+ "%)";
+
+            //this.boxColor = "red";
+
 			changes.forEachChangedItem((r : KeyValueChangeRecord) => {
                 
-                    
-
                     console.log(r)
                     //console.log('changed ', r.currentValue)
-                
                 //console.log('changed ', r.currentValue)
             });
 			//changes.forEachAddedItem(r => console.log('added ' + r.currentValue));
@@ -136,83 +157,42 @@ export class LightControlComponent implements OnInit, OnChanges, DoCheck  {
         return [hue/360, sat, bri];
     }
 
-    HSVToRGB(h : number, s : number, v: number) : number[]{
-        var r = 0, g = 0, b = 0;
-        var i = 0;
-        var f = 0, p = 0, q = 0, t = 0;
-        
-        // Make sure our arguments stay in-range
-        h = Math.max(0, Math.min(360, h));
-        s = Math.max(0, Math.min(100, s));
-        v = Math.max(0, Math.min(100, v));
-        
-        // We accept saturation and value arguments from 0 to 100 because that's
-        // how Photoshop represents those values. Internally, however, the
-        // saturation and value are calculated from a range of 0 to 1. We make
-        // That conversion here.
-        s /= 100;
-        v /= 100;
-        
-        if(s == 0) {
-            // Achromatic (grey)
-            r = g = b = v;
-            return [
-                Math.round(r * 255), 
-                Math.round(g * 255), 
-                Math.round(b * 255)
-            ];
+    HSVtoRGB (h : number, s : number, v : number) {
+        var r : number, g:number, b:number;
+
+        var i = Math.floor(h * 6);
+        var f = h * 6 - i;
+        var p = v * (1 - s);
+        var q = v * (1 - f * s);
+        var t = v * (1 - (1 - f) * s);
+
+        switch (i % 6) {
+            case 0: r = v, g = t, b = p; break;
+            case 1: r = q, g = v, b = p; break;
+            case 2: r = p, g = v, b = t; break;
+            case 3: r = p, g = q, b = v; break;
+            case 4: r = t, g = p, b = v; break;
+            case 5: r = v, g = p, b = q; break;
         }
-        
-        h /= 60; // sector 0 to 5
-        i = Math.floor(h);
-        f = h - i; // factorial part of h
-        p = v * (1 - s);
-        q = v * (1 - s * f);
-        t = v * (1 - s * (1 - f));
-        
-        switch(i) {
-            case 0:
-                r = v;
-                g = t;
-                b = p;
-                break;
-        
-            case 1:
-                r = q;
-                g = v;
-                b = p;
-                break;
-        
-            case 2:
-                r = p;
-                g = v;
-                b = t;
-                break;
-        
-            case 3:
-                r = p;
-                g = q;
-                b = v;
-                break;
-        
-            case 4:
-                r = t;
-                g = p;
-                b = v;
-                break;
-        
-            default: // case 5:
-                r = v;
-                g = p;
-                b = q;
+
+        return [ r * 255, g * 255, b * 255 ];
+    }
+
+    HSVtoHSL(h : number, s : number, v : number) {
+    // both hsv and hsl values are in [0, 1]
+        var l = (2 - s) * v / 2;
+
+        if (l != 0) {
+            if (l == 1) {
+                s = 0
+            } else if (l < 0.5) {
+                s = s * v / (l * 2)
+            } else {
+                s = s * v / (2 - l * 2)
+            }
         }
-        
-        return [
-            Math.round(r * 255), 
-            Math.round(g * 255), 
-            Math.round(b * 255)
-        ];
-    
+
+        return [h, s, l]
     }
 
 }
