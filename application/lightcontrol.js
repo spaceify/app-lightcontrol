@@ -28,9 +28,12 @@ self.getLightStates = function(callobj, callback)
 		
 	};
 
-self.setLightState =  function(gatewayId, lightId, state)
+self.setLightState =  function(gatewayId, lightId, state, callObj, callback)
 	{
-	lightsService.callRpc("setLightState", [gatewayId, lightId, state]);
+	lightsService.callRpc("setLightState", [gatewayId, lightId, state], self, function(err, data)
+		{
+		callback(err, data);		
+		});
 	};
 
 	// IMPLEMENT start AND fail METHODS IN YOUR APPLICATION!!! -- -- -- -- -- -- -- -- -- -- //
