@@ -13,9 +13,9 @@
   ],
   "name": "Light Control app",
   "unique_name": "spaceify/lightcontrol",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "sandboxed",
-  "category": "graphics",
+  "category": "multimedia",
   "start_command": "node lightcontrol.js",
   "implements": [
     "WEB_SERVER"
@@ -25,6 +25,11 @@
     "email": "admin@spaceify.net",
     "url": "http://spaceify.net"
   },
+  "images": [
+    {
+      "file": "icon.png"
+    }
+  ],
   "short_description": "App for controlling your smart lights.",
   "appstore_description": "App for controlling your smart lights. 'spaceify.org/services/lights' service implementing driver is required (e.g. 'spaceify/driverphilipshue' or 'spaceify/driverosramlightify').",
   "license": "MIT",
