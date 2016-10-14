@@ -6,13 +6,13 @@ import {Light} from './light'
 
 import {Gateway} from './gateway'
 
-import { TreeModule } from 'angular2-tree-component';
+//import { TreeModule } from 'angular2-tree-component';
 
 
 @Component({
-    selector: 'my-app',
+    selector: 'app-root',
     //changeDetection: ChangeDetectionStrategy.OnPush,
-    templateUrl: 'app/app.component.html',
+    templateUrl: 'app.component.html',
     styles: [`
         .center {
             padding: 20px;

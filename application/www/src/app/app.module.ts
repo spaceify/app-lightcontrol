@@ -16,10 +16,10 @@ import { TimepickerModule } from 'ng2-bootstrap/ng2-bootstrap';
 
 import { HttpModule }      from '@angular/http';
 
-import { TreeModule } from 'angular2-tree-component';
+//import { TreeModule } from 'angular2-tree-component';
 
 import { MaterialModule} from  '@angular/material';
-
+import {APP_BASE_HREF} from '@angular/common';
 //import {Ng2SliderComponent} from "ng2-slider-component/ng2-slider.component";
 
 @NgModule({
@@ -30,11 +30,12 @@ import { MaterialModule} from  '@angular/material';
     ButtonsModule, 
     TabsModule, 
     TimepickerModule, 
-    TreeModule, 
+    //TreeModule, 
     MaterialModule.forRoot(),
      ],
   declarations: [ AppComponent, LightControlComponent ],
   providers: [LightControlService],
+ // ,{ provide: APP_BASE_HREF, useValue: "/app" }],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

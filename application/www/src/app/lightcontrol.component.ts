@@ -10,9 +10,9 @@ import {MdSlider} from '@angular/material';
 
 @Component({
     selector: 'light-control',
-    templateUrl: 'app/lightcontrol.component.html',
+    templateUrl: 'lightcontrol.component.html',
     styles: [` .colorBox {
-        width: 24px;
+        width: 128px;
         height: 24px;
         background:#fff;
         }   
@@ -23,6 +23,7 @@ export class LightControlComponent implements OnInit, OnChanges, DoCheck  {
     @Input() selectedLight : Light;
     @ViewChild('sliderHue') sliderHue : MdSlider; 
 
+    changing  = false;
 
     differ: any;
 
@@ -58,34 +59,38 @@ export class LightControlComponent implements OnInit, OnChanges, DoCheck  {
 
 		if(changes) {
 			console.log('Selected Light - changes detected');
-            this.lightService.setLight(this.selectedLight);
+            //this.lightService.setLight(this.selectedLight);
 
             var hueNormal = this.selectedLight.hue/65535;
             var satNormal = this.selectedLight.sat/254;
             var briNormal = this.selectedLight.bri/254;
 
-            let hsl = this.HSVtoHSL(hueNormal, satNormal, briNormal);
-
-            //console.log(hueNormal);
-            //HSVToRGB();
+            //let hsl = this.HSVtoHSL(hueNormal, satNormal, briNormal);
             //this.boxColor = "hsl("+Math.floor(hsl[0]*360)+", "+Math.floor(hsl[1]*100)+"%,"+ Math.floor(hsl[2]*100)+ "%)";
 
             let rgb = this.HSVtoRGB(hueNormal, satNormal, briNormal);
 
-            this.boxColor = "rgb("+Math.floor(rgb[0])+", "+Math.floor(rgb[1])+"%,"+ Math.floor(rgb[2])+ "%)";
+            this.boxColor = "rgb("+Math.floor(rgb[0])+", "+Math.floor(rgb[1])+","+ Math.floor(rgb[2])+ ")";
 
+
+            this.changing = true;
             //this.boxColor = "red";
 
 			changes.forEachChangedItem((r : KeyValueChangeRecord) => {
                 
-                    console.log(r)
-                    //console.log('changed ', r.currentValue)
+                    //console.log(r)
+                   
                 //console.log('changed ', r.currentValue)
             });
 			//changes.forEachAddedItem(r => console.log('added ' + r.currentValue));
 			//changes.forEachRemovedItem(r => console.log('removed ' + r.currentValue));
 		} else {
 			//console.log('nothing changed');
+            if(this.changing){
+                this.lightService.setLight(this.selectedLight);
+            }
+
+            this.changing = false;
             
 		}
 

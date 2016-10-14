@@ -44,7 +44,7 @@ export class LightControlService {
 		else{
 
 			var data : any;
-        	this.http.get('app/mock-data2.json')
+        	this.http.get('assets/mock-data2.json')
                 .subscribe(res => 
 				{
 					data = res.json();
@@ -165,7 +165,11 @@ export class LightControlService {
 		);
 
 		*/
+
+		console.log(lightEventCounter++);
 		
 	}
 
 }
+
+var lightEventCounter = 0;
