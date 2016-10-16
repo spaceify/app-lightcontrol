@@ -10,21 +10,37 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 
+<script src="http://edge.spaceify.net/libs/spaceifyinitialize.js?jquery"></script>
+
 <body>
   <app-root>Loading...</app-root>
 </body>
-</html>
+
 
 <script>
 
- 
-  var head = document.getElementsByTagName('head')[0];
+  /*
 
-  var script = document.createElement('script');
-  script.src = "http://edge.spaceify.net/libs/spaceifyinitialize.js?jquery";
-  script.type = 'text/javascript';
+  var event = new Event('spaceifyReady');
+  setTimeout(function(){ 
+    console.log("Dispatch spaceifyReady");
+    //window.dispatchEvent(event);
+  
+   }, 3000);
 
-   head.appendChild(script)
+  
+   window.addEventListener("spaceifyReady", function(){
+     console.log("spaceifyReady");
+
+     //document.getElementsByTagName("BODY")[0];
+     
+   });
+
+   */
   
 
-</script>
+  </script>
+</html>
+
+
+

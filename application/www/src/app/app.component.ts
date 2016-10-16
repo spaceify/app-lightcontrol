@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, HostListener } from '@angular/core';
 import { LightControlComponent }  from './lightcontrol.component';
 import { LightControlService } from './lightcontrol.service';
 
@@ -39,6 +39,13 @@ export class AppComponent implements OnInit{
         {title: 'Light 3', content: '3', removable: false}
     ];
 
+
+    @HostListener('window:spaceifyReady', ['$event'])
+	spaceifyReady(){
+        console.log("spaceifyReady from app.component");
+        this.lightService.spaceifyReady();;
+
+    }
     /*
     nodes = [
     {

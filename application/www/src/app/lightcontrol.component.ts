@@ -61,6 +61,14 @@ export class LightControlComponent implements OnInit, OnChanges, DoCheck  {
 			console.log('Selected Light - changes detected');
             //this.lightService.setLight(this.selectedLight);
 
+            /*
+            let hsv =  this.RGBtoHSV(this.RGB.red, this.RGB.green, this.RGB.blue);
+            this.selectedLight.hue = Math.floor(65535 * hsv[0]);
+            this.selectedLight.sat = Math.floor(254 * hsv[1]);
+            this.selectedLight.bri = Math.floor(253 * hsv[2] +1);
+
+            */
+
             var hueNormal = this.selectedLight.hue/65535;
             var satNormal = this.selectedLight.sat/254;
             var briNormal = this.selectedLight.bri/254;
@@ -97,16 +105,16 @@ export class LightControlComponent implements OnInit, OnChanges, DoCheck  {
 
         
 
+        
         /*
 
         changes = this.differ.diff(this.RGB);
             if(changes) {
                 console.log('RGB changes detected');
-                let hsv =  this.RGBtoHSV(this.RGB.red, this.RGB.green, this.RGB.blue);
-                this.selectedLight.hue = Math.floor(65535 * hsv[0]);
-                this.selectedLight.sat = Math.floor(254 * hsv[1]);
-                this.selectedLight.bri = Math.floor(253 * hsv[2] +1);
-                this.lightService.setLight(this.selectedLight);
+
+                this.changing = true;
+
+                
 
                 changes.forEachChangedItem((r : KeyValueChangeRecord) => {
                     
@@ -117,11 +125,24 @@ export class LightControlComponent implements OnInit, OnChanges, DoCheck  {
                 //changes.forEachAddedItem(r => console.log('added ' + r.currentValue));
                 //changes.forEachRemovedItem(r => console.log('removed ' + r.currentValue));
             } else {
+                if(this.changing ){
+
+                    let hsv =  this.RGBtoHSV(this.RGB.red, this.RGB.green, this.RGB.blue);
+                    this.selectedLight.hue = Math.floor(65535 * hsv[0]);
+                    this.selectedLight.sat = Math.floor(254 * hsv[1]);
+                    this.selectedLight.bri = Math.floor(253 * hsv[2] +1);
+                    this.lightService.setLight(this.selectedLight);
+
+                     this.changing = false;
+
+                     this.lightService.setLight(this.selectedLight);
+                }
                 //console.log('nothing changed');
             }
 
-        */
+            */
 
+      
         
 
         //console.log(hsv);

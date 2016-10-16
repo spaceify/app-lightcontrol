@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable} from '@angular/core';
 import {Light} from './light'
 import {Gateway} from './gateway'
 import {Http} from '@angular/http';
@@ -22,6 +22,19 @@ export class LightControlService {
 
 	private lightData : Gateway[] = [];
 
+	spaceifyIsReady : boolean = false;
+
+	spaceifyReady(){
+		this.spaceify = new SpaceifyApplication();
+
+			//driverPhilipsHue = new PhilipsHueDriver();
+		this.spaceify.start(this, "spaceify/lightcontrol");
+
+		console.log("Spaceify ready");
+		this.spaceifyIsReady = true;
+	}
+
+
 	//loading$: Observable<String>;
     //private _observer: Observer<String>;
 
@@ -36,12 +49,17 @@ export class LightControlService {
 		//this.lights = new Observable(observer => {});
 
 		if (typeof SpaceifyApplication === 'function'){
+
+			console.log("Spaceify found");
+			/*
 			this.spaceify = new SpaceifyApplication();
 
 			//driverPhilipsHue = new PhilipsHueDriver();
 			this.spaceify.start(this, "spaceify/lightcontrol");
+			*/
 		}
 		else{
+			console.log("Load mockdata");
 
 			var data : any;
         	this.http.get('assets/mock-data2.json')
@@ -58,6 +76,9 @@ export class LightControlService {
 	}
 
 	private parseData(data : any){
+
+		this.lights.length = 0;
+
 		for(var id in data){
 
 			//self.lights.push(new Gateway(id, data[id]));
@@ -138,6 +159,12 @@ export class LightControlService {
 	}
 
 	fail(){}
+
+	isSpaceify() : boolean{
+		if (typeof SpaceifyApplication === 'function')
+			return true;
+		return false;
+	}
 
 	getLights(){
 
