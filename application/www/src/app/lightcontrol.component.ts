@@ -55,23 +55,17 @@ export class LightControlComponent implements OnInit, OnChanges, DoCheck  {
     }
 
     ngDoCheck(){
-        var changes = this.differ.diff(this.selectedLight);
+    
+        var changes = this.differ.diff(this.selectedLight.state);
 
 		if(changes) {
-			console.log('Selected Light - changes detected');
+			console.log('Selected Light State - changes detected');
             //this.lightService.setLight(this.selectedLight);
 
-            /*
-            let hsv =  this.RGBtoHSV(this.RGB.red, this.RGB.green, this.RGB.blue);
-            this.selectedLight.hue = Math.floor(65535 * hsv[0]);
-            this.selectedLight.sat = Math.floor(254 * hsv[1]);
-            this.selectedLight.bri = Math.floor(253 * hsv[2] +1);
-
-            */
-
-            var hueNormal = this.selectedLight.hue/65535;
-            var satNormal = this.selectedLight.sat/254;
-            var briNormal = this.selectedLight.bri/254;
+            
+            var hueNormal = this.selectedLight.state.hue/65535;
+            var satNormal = this.selectedLight.state.sat/254;
+            var briNormal = this.selectedLight.state.bri/254;
 
             //let hsl = this.HSVtoHSL(hueNormal, satNormal, briNormal);
             //this.boxColor = "hsl("+Math.floor(hsl[0]*360)+", "+Math.floor(hsl[1]*100)+"%,"+ Math.floor(hsl[2]*100)+ "%)";
@@ -82,6 +76,7 @@ export class LightControlComponent implements OnInit, OnChanges, DoCheck  {
 
 
             this.changing = true;
+            this.selectedLight.changeTime = Date.now();
             //this.boxColor = "red";
 
 			changes.forEachChangedItem((r : KeyValueChangeRecord) => {
@@ -95,29 +90,37 @@ export class LightControlComponent implements OnInit, OnChanges, DoCheck  {
 		} else {
 			//console.log('nothing changed');
             if(this.changing){
+                
+                
                 this.lightService.setLight(this.selectedLight);
+                
+                 
             }
 
             this.changing = false;
             
 		}
 
-
         
 
+
+       
         
         /*
 
-        changes = this.differ.diff(this.RGB);
+        var changes = this.differ.diff(this.RGB);
             if(changes) {
                 console.log('RGB changes detected');
 
                 this.changing = true;
 
+                this.boxColor = "rgb("+this.RGB.red+", "+this.RGB.green+","+ this.RGB.blue+ ")";
                 
+                //let hsv =  this.RGBtoHSV(this.RGB.red, this.RGB.green, this.RGB.blue);
+                //console.log(hsv);  
 
                 changes.forEachChangedItem((r : KeyValueChangeRecord) => {
-                    
+                 
                     
                     //console.log(r)
                    
@@ -128,28 +131,72 @@ export class LightControlComponent implements OnInit, OnChanges, DoCheck  {
                 if(this.changing ){
 
                     let hsv =  this.RGBtoHSV(this.RGB.red, this.RGB.green, this.RGB.blue);
+                    //let hsv =  this.RGBtoHSVbroken(this.RGB.red, this.RGB.green, this.RGB.blue);
+
                     this.selectedLight.hue = Math.floor(65535 * hsv[0]);
                     this.selectedLight.sat = Math.floor(254 * hsv[1]);
                     this.selectedLight.bri = Math.floor(253 * hsv[2] +1);
+                    //console.log(hsv);
                     this.lightService.setLight(this.selectedLight);
 
                      this.changing = false;
 
-                     this.lightService.setLight(this.selectedLight);
+                     //this.lightService.setLight(this.selectedLight);
                 }
                 //console.log('nothing changed');
             }
 
-            */
-
-      
-        
-
         //console.log(hsv);
+
+        */
 
     }
 
+
+
     RGBtoHSV(r : number, g : number, b : number) : number[]{
+
+        //console.log("red value: "+r);
+
+        var hue: number, sat: number, bri: number;
+
+        var R : number = r/255;
+        var G : number = g/255;
+        var B : number = b/255;
+
+        //let rgbToRange =[R, G, B]
+
+        let cMax = Math.max(R, G, B);
+        let cMin = Math.min(R, G, B);
+        let delta = cMax - cMin;
+
+        bri = cMax;
+
+        if(delta === 0){
+            hue = sat = 0;
+        }
+        else{
+
+            if(R ===cMax)
+                hue = 60*(((G-B)/delta) %6);
+            if(G ===cMax)
+                hue = 60*((B-R)/delta + 2);
+            if(B ===cMax)
+                hue = 60*((R-G)/delta +4);
+
+            sat = 0;
+
+            if(cMax != 0)
+                sat = delta/cMax;
+
+           
+        }
+
+
+        return [hue/360, sat, bri];
+    }
+
+    RGBtoHSVbroken(r : number, g : number, b : number) : number[]{
 
         //console.log("red value: "+r);
 

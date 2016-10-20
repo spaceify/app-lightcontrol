@@ -1,10 +1,10 @@
 <h2>Light {{selectedLight.id}}</h2>
 
-<button *ngIf="selectedLight.on" md-icon-button md-raised-button color="warn" (click)="selectedLight.on = false;">
+<button *ngIf="selectedLight.state.on" md-icon-button md-raised-button color="warn" (click)="selectedLight.state.on = false;">
       <md-icon class="md-24">lightbulb_outline</md-icon>
 </button>
 
-<button *ngIf="!selectedLight.on" md-icon-button md-raised-button (click)="selectedLight.on = true;">
+<button *ngIf="!selectedLight.state.on" md-icon-button md-raised-button (click)="selectedLight.state.on = true;">
       <md-icon class="md-24">lightbulb_outline</md-icon>
 </button>
 
@@ -13,7 +13,7 @@
 <h3>Hue</h3>
 
 
-<md-slider [(ngModel)]="selectedLight.hue" min="0" max="65535" #sliderHue>
+<md-slider [(ngModel)]="selectedLight.state.hue" min="0" max="65535" #sliderHue>
 </md-slider>
 
 <p>{{sliderHue.value}}</p>
@@ -21,7 +21,7 @@
 <h3>Saturation</h3>
 
 
-<md-slider min="0" max="254" [(ngModel)]="selectedLight.sat" #sliderSat>
+<md-slider min="0" max="254" [(ngModel)]="selectedLight.state.sat" #sliderSat>
 </md-slider>
 
 <p>{{selectedLight.sat}}</p>
@@ -29,15 +29,15 @@
 <h3>Brightness</h3>
 
 
-<md-slider min="1" max="254" [(ngModel)]="selectedLight.bri" #sliderBri>
+<md-slider min="1" max="254" [(ngModel)]="selectedLight.state.bri" #sliderBri>
 </md-slider>
 
 <p>{{selectedLight.bri}}</p>
 
 <div [style.background-color]="boxColor" class="colorBox"></div>
 
-<!--
 
+<!--
 
 <h3>Red</h3>
 

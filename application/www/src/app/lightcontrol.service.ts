@@ -1,5 +1,5 @@
-import { Injectable} from '@angular/core';
-import {Light} from './light'
+import { Injectable, EventEmitter} from '@angular/core';
+import {Light, LightState} from './light'
 import {Gateway} from './gateway'
 import {Http} from '@angular/http';
 
@@ -22,7 +22,13 @@ export class LightControlService {
 
 	private lightData : Gateway[] = [];
 
-	spaceifyIsReady : boolean = false;
+	private eventRejectTime : number = 200;
+
+	//spaceifyIsReady : boolean = false;
+
+	//lightStateChange: EventEmitter<Light> = new EventEmitter();
+
+
 
 	spaceifyReady(){
 		this.spaceify = new SpaceifyApplication();
@@ -31,7 +37,7 @@ export class LightControlService {
 		this.spaceify.start(this, "spaceify/lightcontrol");
 
 		console.log("Spaceify ready");
-		this.spaceifyIsReady = true;
+		//this.spaceifyIsReady = true;
 	}
 
 
@@ -75,6 +81,42 @@ export class LightControlService {
 
 	}
 
+	onLightStateChange(event : any, callObj : any, callback : Function){
+		
+		console.log(event);
+		
+		console.log(callObj);
+
+		console.log(callback);
+
+
+		
+
+		//this.lightStateChange.emit(event);
+
+		for(let light of this.lights){
+
+			//console.log(light);
+
+			if(light.gatewayid === event.gatewayId && light.id === event.lightId){
+
+				if(Date.now() - light.changeTime > this.eventRejectTime){
+					light.state = event.state;			
+				}
+
+				//light.changedByEvent = true;
+
+				console.log(event.state);
+			}
+
+		}
+
+		//callback();
+
+		
+
+	}
+
 	private parseData(data : any){
 
 		this.lights.length = 0;
@@ -87,21 +129,25 @@ export class LightControlService {
 
 			//console.log(data);
 		}
-		console.log(this.lightData);
+		//console.log(this.lightData);
 	}
 
 	private toLight(id : string, gatewayid : string, light:any): Light{
 
 		console.log(light);
 
+		let state = <LightState>({
+			on: light.state.on,
+			hue: light.state.hue,
+			sat: light.state.sat,
+			bri: light.state.bri
+		});
+
 		let newLight = <Light>({
 			id: id,
 			gatewayid:gatewayid,
 			name : "Light "+id,
-			on: light.state.on,
-			hue: light.state.hue,
-			sat: light.state.sat,
-			bri: light.state.bri,
+			state: state,
 		});
 
 		this.lights.push(newLight);
@@ -156,15 +202,32 @@ export class LightControlService {
 					self.parseData(data);
 
 					});
+
+		
+
+		this.privateService.exposeRpcMethod("onLightStateChange", self, self.onLightStateChange.bind(self));
+		this.privateService.callRpc("addLightStateListener", ["onLightStateChange"], self, function(err : string, data : any)
+					{
+
+						console.log("Wuhuu");
+						//console.log("onLightStateChange Rpc call returned "+err+data);
+
+						//console.log(data);
+
+					});
+
+
 	}
 
 	fail(){}
 
+/*
 	isSpaceify() : boolean{
 		if (typeof SpaceifyApplication === 'function')
 			return true;
 		return false;
 	}
+	*/
 
 	getLights(){
 
@@ -177,7 +240,11 @@ export class LightControlService {
 	}
 
 	setLight(light : Light){
-		let state = {on: light.on, bri: light.bri, sat: light.sat, hue: light.hue}
+		let state = light.state;
+		//console.log(0/0);
+
+		//state = {on: light.on, bri: NaN, sat: .400, hue: -50}
+
 		if(this.privateService)
 			this.privateService.callRpc("setLightState",[light.gatewayid, light.id, state],  self, function(err : string, data : any)
 					{

@@ -1,15 +1,27 @@
-class LightState {
-  
+export class LightState {
+  on : boolean;
+  hue : number;
+  bri: number;
+  sat: number;
 }
 
 export class Light {
   id : string;
   gatewayid : string
   name : string;
+
+  state : LightState;
+
+  /*
   on : boolean;
   hue : number;
   bri: number;
   sat: number;
+  */
+
+
+  //changing : boolean = false;
+  changeTime : number;
   //selected : boolean = false;
 
   /*
