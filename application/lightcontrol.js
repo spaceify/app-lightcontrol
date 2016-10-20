@@ -37,7 +37,7 @@ self.addLightStateListener = function(callbackName, callObj, callback)
 	
 	var listener = {connectionId: callObj.connectionId, callbackName: callbackName};
 
-	lightStateListeners[connectionId] = listener;
+	lightStateListeners[listener.connectionId] = listener;
 	
 	
 	callback(null,"Ok");
@@ -81,6 +81,8 @@ self.start = function()
 
 	service.exposeRpcMethod("getLightStates", self, self.getLightStates);
 	service.exposeRpcMethod("setLightState", self, self.setLightState);
+	service.exposeRpcMethod("addLightStateListener", self, self.addLightStateListener);
+
 	service.setDisconnectionListener(self.onClientDisconnected);	
 
 	// REQUIRED - OUR CONNECTION TO THE LIGHTS SERVICE
