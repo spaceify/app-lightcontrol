@@ -24,7 +24,7 @@ export class LightControlService {
 
 	private eventRejectTime : number = 200;
 
-	//spaceifyIsReady : boolean = false;
+	spaceifyIsReady : boolean = false;
 
 	//lightStateChange: EventEmitter<Light> = new EventEmitter();
 
@@ -37,7 +37,7 @@ export class LightControlService {
 		this.spaceify.start(this, "spaceify/lightcontrol");
 
 		console.log("Spaceify ready");
-		//this.spaceifyIsReady = true;
+		this.spaceifyIsReady = true;
 	}
 
 
