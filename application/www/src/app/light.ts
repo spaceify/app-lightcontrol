@@ -3,6 +3,7 @@ export class LightState {
   hue : number;
   bri: number;
   sat: number;
+  transitiontime: number;
 }
 
 export class Light {
@@ -22,6 +23,7 @@ export class Light {
 
   //changing : boolean = false;
   changeTime : number;
+  changegByEvent : boolean = true;
   //selected : boolean = false;
 
   /*

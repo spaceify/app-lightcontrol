@@ -101,7 +101,8 @@ export class LightControlService {
 			if(light.gatewayid === event.gatewayId && light.id === event.lightId){
 
 				if(Date.now() - light.changeTime > this.eventRejectTime){
-					light.state = event.state;			
+					light.state = event.state;		
+					light.changegByEvent = true;	
 				}
 
 				//light.changedByEvent = true;
@@ -241,6 +242,7 @@ export class LightControlService {
 
 	setLight(light : Light){
 		let state = light.state;
+		state.transitiontime = 0;
 		//console.log(0/0);
 
 		//state = {on: light.on, bri: NaN, sat: .400, hue: -50}
