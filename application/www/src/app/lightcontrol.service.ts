@@ -242,7 +242,7 @@ export class LightControlService {
 
 	setLight(light : Light){
 		let state = light.state;
-		state.transitiontime = 0;
+		state.transitiontime = 1;
 		//console.log(0/0);
 
 		//state = {on: light.on, bri: NaN, sat: .400, hue: -50}
