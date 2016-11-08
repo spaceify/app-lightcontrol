@@ -40,7 +40,7 @@ export class AppComponent implements OnInit{
     ];
 
 
-    @HostListener('window:spaceifyReady', ['$event'])
+    @HostListener('window:load', ['$event'])
 	spaceifyReady(){
         console.log("spaceifyReady from app.component");
         this.lightService.spaceifyReady();;

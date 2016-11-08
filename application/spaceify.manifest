@@ -17,7 +17,7 @@
   ],
   "name": "Light Control app",
   "unique_name": "spaceify/lightcontrol",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "type": "sandboxed",
   "category": "multimedia",
   "start_command": "node lightcontrol.js",
